@@ -1,0 +1,2 @@
+# BilibiliUploaderAllRender
+用于解决B站看不到想要的UP主更新的tampermonkey脚本
