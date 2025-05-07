@@ -12,6 +12,8 @@
 // @grant        GM_listValues
 // @grant        GM_deleteValue
 // @grant        GM_registerMenuCommand
+// @updateURL    https://raw.githubusercontent.com/moran0710/BilibiliUploaderAllRender/main/user.js
+// @downloadURL  https://raw.githubusercontent.com/moran0710/BilibiliUploaderAllRender/main/user.js
 
 // @connect      api.bilibili.com
 // ==/UserScript==
