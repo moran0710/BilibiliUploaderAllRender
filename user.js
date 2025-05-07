@@ -5,6 +5,7 @@
 // @author       Moran0710
 // @version      0.0.1
 // @match        https://t.bilibili.com/*
+// @match        https://t.bilibili.com/ 
 // @icon         https://www.bilibili.com/favicon.ico
 // @grant        GM_setValue
 // @grant        GM_getValue
@@ -14,8 +15,10 @@
 // @grant        GM_registerMenuCommand
 // @updateURL    https://raw.githubusercontent.com/moran0710/BilibiliUploaderAllRender/main/user.js
 // @downloadURL  https://raw.githubusercontent.com/moran0710/BilibiliUploaderAllRender/main/user.js
-
 // @connect      api.bilibili.com
+// @require      https://greasyfork.org/scripts/447362-gm-config/code/GM_config.js
+// @noframes
+// @run-at       document-end
 // ==/UserScript==
 
 class User {
