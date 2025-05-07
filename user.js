@@ -133,19 +133,16 @@ async function getLatest() {
     root.innerHTML = "";
     root.appendChild(all_dyn)
     const updatedUploadersStat = [];
-    for (let index = 0; index < user.uploaders.length; index++) {
-        const uploader = user.uploaders[index];
+    var is_352 = false;
+    
+    await user.uploaders.forEach(async (uploader, index) => {
         await sleep(200);
         //更新数据
         const isUpdated = await uploader.isUpdated();
         //保存最新时间戳数据
         console.log(`${uploader.name}(${uploader.mid})是否更新：${isUpdated}`)
         if (isUpdated === null) {
-            GM_notification({
-                text: "遭遇-352风控，点击关闭进入动态页面完成验证码"
-            });
-            window.open(`https://space.bilibili.com/1/dynamic`, '_blank');
-            break;
+            is_352 = true;
         } else if (isUpdated) {
             root.insertAdjacentHTML('beforeend', createNewUploaderElement(uploader));
             GM_setValue(uploader.mid, uploader.latest_time);
@@ -154,7 +151,14 @@ async function getLatest() {
             updatedUploadersStat.push(0);
         }
     }
-    console.log(updatedUploadersStat);
+)
+
+    if(is_352){
+        GM_notification({
+            text: "遭遇-352风控，点击关闭进入动态页面完成验证码"
+        });
+        window.open(`https://space.bilibili.com/1/dynamic`, '_blank');
+    }
 
     // 绑定委托点击事件监听器
     root.addEventListener('click', (e) => {
@@ -216,6 +220,9 @@ function sleep(time) {
 (function () {
     GM_registerMenuCommand("获取Up主最新动态", getLatest)
     GM_registerMenuCommand("清除本地数据", cleanData)
+    GM_registerMenuCommand("本地记录的UP数量", () =>{
+        GM_notification(`当前记录的UP数量为${GM_listValues().length}`)
+    })
 
     const origGetRangeAt = Selection.prototype.getRangeAt;
     Selection.prototype.getRangeAt = function (index) {
